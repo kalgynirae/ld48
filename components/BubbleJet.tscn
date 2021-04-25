@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://bubbles_material.tres" type="Material" id=1]
+
+[node name="BubbleJet" type="Particles2D"]
+amount = 64
+lifetime = 4.0
+preprocess = 4.0
+randomness = 0.1
+process_material = ExtResource( 1 )
