@@ -1,6 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Interface.gd" type="Script" id=1]
+[ext_resource path="res://levels/Overworld.tscn" type="PackedScene" id=2]
+[ext_resource path="res://levels/Level1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://levels/Level2.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LoadingFade"
@@ -16,105 +19,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 )
 }
 
-[sub_resource type="Shader" id=5]
-code = "shader_type canvas_item;
-
-uniform float bloomRadius = 1.0;
-uniform float bloomThreshold = 1.0;
-uniform float bloomIntensity = 1.0;
-
-vec3 GetBloomPixel(sampler2D tex, vec2 uv, vec2 texPixelSize) {
-	vec2 uv2 = floor(uv / texPixelSize) * texPixelSize;
-	uv2 += texPixelSize * .001;
-	vec3 tl = max(texture(tex, uv2).rgb - bloomThreshold, 0.0);
-	vec3 tr = max(texture(tex, uv2 + vec2(texPixelSize.x, 0.0)).rgb - bloomThreshold, 0.0);
-	vec3 bl = max(texture(tex, uv2 + vec2(0.0, texPixelSize.y)).rgb - bloomThreshold, 0.0);
-	vec3 br = max(texture(tex, uv2 + vec2(texPixelSize.x, texPixelSize.y)).rgb - bloomThreshold, 0.0);
-	vec2 f = fract( uv / texPixelSize );
-
-	vec3 tA = mix( tl, tr, f.x );
-	vec3 tB = mix( bl, br, f.x );
-
-	return mix( tA, tB, f.y );
-}
-
-vec3 GetBloom(sampler2D tex, vec2 uv, vec2 texPixelSize) {
-	vec3 bloom = vec3(0.0);
-	vec2 off = vec2(1) * texPixelSize * bloomRadius;
-	bloom += GetBloomPixel(tex, uv + off * vec2(-1, -1), texPixelSize * bloomRadius) * 0.292893;
-	bloom += GetBloomPixel(tex, uv + off * vec2(-1, 0), texPixelSize * bloomRadius) * 0.5;
-	bloom += GetBloomPixel(tex, uv + off * vec2(-1, 1), texPixelSize * bloomRadius) * 0.292893;
-	bloom += GetBloomPixel(tex, uv + off * vec2(0, -1), texPixelSize * bloomRadius) * 0.5;
-	bloom += GetBloomPixel(tex, uv + off * vec2(0, 0), texPixelSize * bloomRadius) * 1.0;
-	bloom += GetBloomPixel(tex, uv + off * vec2(0, 1), texPixelSize * bloomRadius) * 0.5;
-	bloom += GetBloomPixel(tex, uv + off * vec2(1, -1), texPixelSize * bloomRadius) * 0.292893;
-	bloom += GetBloomPixel(tex, uv + off * vec2(1, 0), texPixelSize * bloomRadius) * 0.5;
-	bloom += GetBloomPixel(tex, uv + off * vec2(1, 1), texPixelSize * bloomRadius) * 0.292893;
-	bloom /= 4.171573f;
-	return bloom;
-}
-
-void fragment() {
-	vec4 col = texture(TEXTURE, UV);
-	vec3 bloom = GetBloom(TEXTURE, UV, TEXTURE_PIXEL_SIZE);
-	col.rgb += bloom * bloomIntensity;
-	COLOR = col;
-}"
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
-shader_param/bloomRadius = 1.0
-shader_param/bloomThreshold = 1.0
-shader_param/bloomIntensity = 1.0
-
-[sub_resource type="ViewportTexture" id=4]
-viewport_path = NodePath("ViewportContainer/CurrentLevel")
+[sub_resource type="Animation" id=2]
+resource_name = "down"
 
 [sub_resource type="Animation" id=3]
-resource_name = "ScrollDown"
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("ViewCurrent:rect_position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 840, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("ViewNext:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( -840, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "ScrollUp"
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("ViewCurrent:rect_position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -840, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("ViewNext:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 840, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
+resource_name = "up"
 
 [node name="Interface" type="Control"]
 pause_mode = 2
@@ -126,24 +35,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-margin_top = -720.0
-margin_right = 1280.0
-stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+smoothing_enabled = true
 
-[node name="CurrentLevel" type="Viewport" parent="ViewportContainer"]
-pause_mode = 1
-size = Vector2( 1280, 720 )
-usage = 0
-render_target_update_mode = 3
+[node name="Levels" type="Node" parent="."]
 
-[node name="NextLevel" type="Viewport" parent="ViewportContainer"]
-pause_mode = 1
-size = Vector2( 1280, 720 )
-usage = 0
+[node name="Overworld" parent="Levels" instance=ExtResource( 2 )]
+
+[node name="Level1" parent="Levels" instance=ExtResource( 3 )]
+position = Vector2( 0, 720 )
+
+[node name="Level2" parent="Levels" instance=ExtResource( 4 )]
+position = Vector2( 0, 1440 )
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 
@@ -188,27 +93,6 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Overlay/Loading"]
 anims/LoadingFade = SubResource( 1 )
 
-[node name="ViewCurrent" type="TextureRect" parent="."]
-material = SubResource( 6 )
-margin_top = 720.0
-margin_right = 1280.0
-margin_bottom = 1440.0
-texture = SubResource( 4 )
-flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ViewNext" type="TextureRect" parent="."]
-material = SubResource( 6 )
-margin_right = 1280.0
-margin_bottom = 720.0
-texture = SubResource( 4 )
-flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="LevelSwitchAnimator" type="AnimationPlayer" parent="."]
-anims/ScrollDown = SubResource( 3 )
-anims/ScrollUp = SubResource( 2 )
+anims/down = SubResource( 2 )
+anims/up = SubResource( 3 )
