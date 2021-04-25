@@ -18,7 +18,9 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.5, 3 )
 }
 
-[node name="Goal" type="Node2D"]
+[node name="Goal" type="Node2D" groups=[
+"goal",
+]]
 script = ExtResource( 2 )
 
 [node name="goal" type="Sprite" parent="."]

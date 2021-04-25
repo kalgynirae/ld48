@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[sub_resource type="Curve" id=1]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 117.818 ), 0.0, 0.0, 0, 0, Vector2( 0.764706, 0 ), 35.9814, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0.679688, 0.916481, 1, 1, 0.92549, 0.968627, 1, 0.564706 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0.235227 ), 0.0, 0.262436, 0, 0, Vector2( 1, 1 ), 0.0474176, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 180.0
+gravity = Vector3( 0, -1, 0 )
+initial_velocity = 8.0
+angular_velocity = 30.0
+angular_velocity_random = 1.0
+angular_velocity_curve = SubResource( 2 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 3.0
+damping_random = 0.5
+angle = 45.0
+angle_random = 1.0
+scale = 2.0
+scale_random = 0.5
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+
+[node name="BubbleUpwardJet" type="Node2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+scale = Vector2( 2, 2 )
+amount = 120
+lifetime = 3.0
+explosiveness = 0.1
+randomness = 0.2
+process_material = SubResource( 7 )

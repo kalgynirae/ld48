@@ -1,5 +1,6 @@
 extends Node2D
 
+export(bool) var noentry
 signal entered
 signal exited
 

@@ -65,16 +65,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="907.83669"
-     inkscape:cy="112.82412"
+     inkscape:zoom="1"
+     inkscape:cx="617.41613"
+     inkscape:cy="609.26846"
      inkscape:document-units="px"
      inkscape:current-layer="layer4"
      inkscape:document-rotation="0"
      showgrid="true"
      units="px"
-     inkscape:window-width="2560"
-     inkscape:window-height="1440"
+     inkscape:window-width="2502"
+     inkscape:window-height="1357"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -1088,7 +1088,7 @@
        ry="3.9687507" />
     <path
        sodipodi:type="star"
-       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#7e773d;fill-opacity:1;stroke:none;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.11666, 2.11665999999999999;stroke-dashoffset:7.40831;stroke-opacity:1;stop-color:#000000;stop-opacity:1;filter:url(#filter5254)"
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#4b8355;fill-opacity:1;stroke:none;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.11666, 2.11665999999999999;stroke-dashoffset:7.40831;stroke-opacity:1;stop-color:#000000;stop-opacity:1;filter:url(#filter5254)"
        id="path5258"
        sodipodi:sides="5"
        sodipodi:cx="306.7713"
@@ -1145,6 +1145,61 @@
        x="271.19794"
        y="55.5625"
        rx="2.6458335"
-       ry="2.6458335" />
+       ry="2.6458335"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <g
+       id="g1007"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.2666px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;"
+         x="101.90147"
+         y="233.15308"
+         id="text979"><tspan
+           sodipodi:role="line"
+           id="tspan977"
+           x="101.90147"
+           y="233.15308"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.26659979px;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583;">DEEPER</tspan></text>
+      <path
+         style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 227.54168,206.37501 0,15.875 -7.93751,1e-5 13.22917,15.87499 13.22917,-15.87499 -7.9375,-1e-5 0,-15.875 z"
+         id="path981"
+         sodipodi:nodetypes="cccccccc" />
+      <path
+         style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 79.37501,206.37501 v 15.875 l -7.93751,1e-5 13.22917,15.87499 13.22917,-15.87499 -7.9375,-1e-5 v -15.875 z"
+         id="path981-3"
+         sodipodi:nodetypes="cccccccc" />
+    </g>
+    <g
+       id="g1007-7"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       transform="translate(1.1718746e-6,42.333328)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.2666px;line-height:1.25;font-family:'Roboto Condensed';-inkscape-font-specification:'Roboto Condensed, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="79.438751"
+         y="233.04559"
+         id="text979-2"><tspan
+           sodipodi:role="line"
+           id="tspan977-7"
+           x="79.438751"
+           y="233.04559"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.2666px;font-family:'Roboto Condensed';-inkscape-font-specification:'Roboto Condensed, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">SHALLOWER</tspan></text>
+      <path
+         style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 58.20834,238.12501 v -15.875 L 50.27083,222.25 63.5,206.37501 76.72917,222.25 l -7.9375,1e-5 v 15.875 z"
+         id="path981-3-2"
+         sodipodi:nodetypes="cccccccc" />
+      <path
+         style="fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 248.70835,238.12501 v -15.875 l -7.93751,-1e-5 13.22917,-15.87499 13.22917,15.87499 -7.9375,1e-5 v 15.875 z"
+         id="path981-6"
+         sodipodi:nodetypes="cccccccc" />
+    </g>
   </g>
 </svg>

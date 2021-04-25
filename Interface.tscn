@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Interface.gd" type="Script" id=1]
 [ext_resource path="res://levels/Overworld.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/Level1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/Level2.tscn" type="PackedScene" id=4]
+[ext_resource path="res://deeper.png" type="Texture" id=5]
+[ext_resource path="res://shallower.png" type="Texture" id=6]
+[ext_resource path="res://levels/Level3.tscn" type="PackedScene" id=7]
+[ext_resource path="res://goal.png" type="Texture" id=8]
+[ext_resource path="res://RobotoMono-Bold.ttf" type="DynamicFontData" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LoadingFade"
@@ -19,11 +24,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 )
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "down"
-
-[sub_resource type="Animation" id=3]
-resource_name = "up"
+[sub_resource type="DynamicFont" id=2]
+size = 52
+use_filter = true
+font_data = ExtResource( 9 )
 
 [node name="Interface" type="Control"]
 pause_mode = 2
@@ -40,6 +44,18 @@ anchor_mode = 0
 current = true
 smoothing_enabled = true
 
+[node name="Deeper" type="Node2D" parent="."]
+
+[node name="deeper" type="Sprite" parent="Deeper"]
+position = Vector2( 1700, 600 )
+texture = ExtResource( 5 )
+
+[node name="Shallower" type="Node2D" parent="."]
+
+[node name="shallower" type="Sprite" parent="Shallower"]
+position = Vector2( 1720, 780 )
+texture = ExtResource( 6 )
+
 [node name="Levels" type="Node" parent="."]
 
 [node name="Overworld" parent="Levels" instance=ExtResource( 2 )]
@@ -50,11 +66,15 @@ position = Vector2( 0, 720 )
 [node name="Level2" parent="Levels" instance=ExtResource( 4 )]
 position = Vector2( 0, 1440 )
 
+[node name="Level3" parent="Levels" instance=ExtResource( 7 )]
+position = Vector2( 0, 2160 )
+
 [node name="Overlay" type="CanvasLayer" parent="."]
 
 [node name="DebugPanel" type="Panel" parent="Overlay"]
+modulate = Color( 1, 1, 1, 0.0470588 )
 margin_right = 1280.0
-margin_bottom = 24.0
+margin_bottom = 22.0
 rect_clip_content = true
 __meta__ = {
 "_edit_lock_": true,
@@ -66,6 +86,11 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="Overlay/DebugPanel/LevelButtons"]
+margin_right = 54.0
+margin_bottom = 14.0
+text = "DEBUG: "
 
 [node name="Loading" type="Node2D" parent="Overlay"]
 visible = false
@@ -93,6 +118,40 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Overlay/Loading"]
 anims/LoadingFade = SubResource( 1 )
 
-[node name="LevelSwitchAnimator" type="AnimationPlayer" parent="."]
-anims/down = SubResource( 2 )
-anims/up = SubResource( 3 )
+[node name="ScorePanel" type="Panel" parent="Overlay"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 1080.0
+margin_top = 24.0
+margin_right = 1256.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Overlay/ScorePanel"]
+margin_left = 57.0
+margin_top = -3.0
+margin_right = 167.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.294118, 0.513726, 0.333333, 1 )
+text = "0/0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="goal" type="Sprite" parent="Overlay/ScorePanel"]
+position = Vector2( 25, 32 )
+texture = ExtResource( 8 )
+
+[node name="DebugPanelTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="GoalCountTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="mouse_entered" from="Overlay/DebugPanel" to="." method="show_debug_panel"]
+[connection signal="timeout" from="DebugPanelTimer" to="." method="hide_debug_panel"]
+[connection signal="timeout" from="GoalCountTimer" to="." method="update_goal_label"]
