@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="LD48-float"
+config/name="Pools"
 run/main_scene="res://Interface.tscn"
 config/icon="res://icon.png"
 
