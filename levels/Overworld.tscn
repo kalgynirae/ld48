@@ -27,8 +27,14 @@ noentry = true
 [node name="vent_c" parent="." instance=ExtResource( 4 )]
 position = Vector2( 640, 280 )
 
-[node name="vent_e" parent="." instance=ExtResource( 4 )]
+[node name="vent_j" parent="." instance=ExtResource( 4 )]
 position = Vector2( 760, 280 )
+
+[node name="vent_m" parent="." instance=ExtResource( 4 )]
+position = Vector2( 520, 280 )
+noentry = true
+
+[node name="BubbleUpwardJet" parent="vent_m" instance=ExtResource( 5 )]
 
 [node name="Goal" parent="." instance=ExtResource( 7 )]
 position = Vector2( 920, 440 )
@@ -67,13 +73,13 @@ position = Vector2( 710, 360 )
 position = Vector2( 710, 430 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 60.0
-margin_top = 50.0
-margin_right = 165.0
-margin_bottom = 210.0
+margin_left = 70.0
+margin_top = 570.0
+margin_right = 540.0
+margin_bottom = 730.0
 custom_fonts/normal_font = ExtResource( 6 )
 custom_colors/default_color = Color( 0.278431, 0.443137, 0.635294, 1 )
-text = "0"
+text = "floor  0"
 __meta__ = {
 "_edit_use_anchors_": false
 }

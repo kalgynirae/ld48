@@ -42,7 +42,9 @@ scale_random = 0.5
 scale_curve = SubResource( 6 )
 color_ramp = SubResource( 4 )
 
-[node name="BubbleUpwardJet" type="Node2D"]
+[node name="BubbleUpwardJet" type="Node2D" groups=[
+"jet",
+]]
 
 [node name="Particles2D" type="Particles2D" parent="."]
 scale = Vector2( 2, 2 )

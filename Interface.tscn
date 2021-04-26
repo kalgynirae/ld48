@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Interface.gd" type="Script" id=1]
 [ext_resource path="res://levels/Overworld.tscn" type="PackedScene" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://levels/Level3.tscn" type="PackedScene" id=7]
 [ext_resource path="res://goal.png" type="Texture" id=8]
 [ext_resource path="res://RobotoMono-Bold.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://music/ld48-0.ogg" type="AudioStream" id=10]
+[ext_resource path="res://music/ld48-3.ogg" type="AudioStream" id=11]
+[ext_resource path="res://music/ld48-2.ogg" type="AudioStream" id=12]
+[ext_resource path="res://music/ld48-1.ogg" type="AudioStream" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "LoadingFade"
@@ -151,6 +155,28 @@ one_shot = true
 
 [node name="GoalCountTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="Music" type="Node" parent="."]
+
+[node name="music0" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 10 )
+volume_db = -10.0
+bus = "music0"
+
+[node name="music1" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 13 )
+volume_db = -10.0
+bus = "music1"
+
+[node name="music2" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 12 )
+volume_db = -10.0
+bus = "music2"
+
+[node name="music3" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+bus = "music3"
 
 [connection signal="mouse_entered" from="Overlay/DebugPanel" to="." method="show_debug_panel"]
 [connection signal="timeout" from="DebugPanelTimer" to="." method="hide_debug_panel"]

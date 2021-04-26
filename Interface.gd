@@ -7,6 +7,8 @@ var level_ids
 var vent_up_levelids
 var vent_down_levelids
 
+var music_players
+
 var Player = preload("res://components/Player.tscn")
 
 onready var DebugPanel = $Overlay/DebugPanel
@@ -36,6 +38,8 @@ func _ready() -> void:
     setup_levels()
     setup_vents()
     setup_goals()
+    setup_switch()
+    setup_music()
     switch_level(0, "")
 
 func setup_levels() -> void:
@@ -91,6 +95,12 @@ func setup_vents() -> void:
             var levelid = vent_down_levelids[name]
             vent.connect("entered", self, "switch_level", [levelid, name])
 
+func setup_music():
+    music_players = []
+    for music in $Music.get_children():
+        music_players.append(music)
+        music.play()
+
 func switch_level(levelid: int, vent_name: String) -> void:
     print("switch_level(%s, %s)" % [levelid, vent_name])
     if just_vented:
@@ -131,6 +141,11 @@ func switch_level(levelid: int, vent_name: String) -> void:
     player.position = destvent.position
     nextlevel.add_child_below_node(destvent, player)
 
+    # change music
+    if currentlevelid != null:
+        AudioServer.set_bus_mute(1 + currentlevelid, true)
+    AudioServer.set_bus_mute(1 + levelid, false)
+
     currentlevelid = levelid
 
     if vent_name != "":
@@ -147,14 +162,39 @@ func setup_goals() -> void:
     seen_levels = []
     $GoalCountTimer.start()
 
+func obtain_goal(goal: Node) -> void:
+    obtained_goals += 1
+    goal.queue_free()
+
 func update_goals() -> void:
     if not seen_levels.has(currentlevelid):
         for goal in get_tree().get_nodes_in_group("goal"):
             if levels[currentlevelid].is_a_parent_of(goal):
                 goal_count += 1
+                goal.connect("entered", self, "obtain_goal", [goal])
         seen_levels.append(currentlevelid)
 
 func update_goal_label() -> void:
     if displayed_goal_count < goal_count:
         displayed_goal_count += 1
     $Overlay/ScorePanel/Label.text = "%s/%s" % [obtained_goals, displayed_goal_count]
+
+
+func setup_switch() -> void:
+    for switch in get_tree().get_nodes_in_group("switch"):
+        switch.connect("flipped", self, "handle_switch_flip")
+
+func handle_switch_flip() -> void:
+    print("flip!")
+    for vent in get_tree().get_nodes_in_group("vent_down"):
+        vent.disconnect("entered", self, "clear_vented_state")
+        var name = vent.name.replace("vent_", "")
+        var levelid = vent_up_levelids[name]
+        vent.connect("entered", self, "switch_level", [levelid, name])
+    for vent in get_tree().get_nodes_in_group("vent_up"):
+        vent.disconnect("entered", self, "clear_vented_state")
+        var name = vent.name.replace("vent_", "")
+        var levelid = vent_down_levelids[name]
+        vent.connect("entered", self, "switch_level", [levelid, name])
+    for jet in get_tree().get_nodes_in_group("jet"):
+        jet.queue_free()
